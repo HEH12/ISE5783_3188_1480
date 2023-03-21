@@ -6,4 +6,5 @@ public abstract class RadialGeometry implements Geometry {
     public RadialGeometry(double radius) {
         this.radius = radius;
     }
+    public RadialGeometry(){this.radius = 0;}
 }

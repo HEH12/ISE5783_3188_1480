@@ -3,9 +3,12 @@ package geometries;
  @author Hadas Holtzberg 326133188 and Zehavi Perla 326381480**/
 import primitives.Point;
 import primitives.Vector;
-/**Params: point
- * Returns: normal from the point to geometries**/
+
 public interface Geometry {
 
+    /**
+     * @param point
+     * @return normal from the point to geometrries
+     */
     public Vector getNormal(Point point);
 }

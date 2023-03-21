@@ -4,16 +4,17 @@ import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
 
-public class Tube implements Geometry{
+public class Tube extends RadialGeometry{
 
     public double radius;
     final Ray _ray;
 
     /**
      * constructor
-     *  radius type double
-     *  ray type ray
+     * @param radius type double
+     * @param ray type ray
      */
+
     public Tube(double radius, Ray ray) {
         this.radius = radius;
         _ray = ray;
@@ -21,24 +22,29 @@ public class Tube implements Geometry{
 
     /**
      * get Radius
-     * return Radius
+     * @return Radius
      */
+
     public double getRadius() {
         return radius;
     }
 
+
     /**
      * get Ray
-     * return Ray
+     * @return Ray
      */
+
     public Ray getRay() {
         return _ray;
     }
 
 
+
     /**
      * print tube's radius and ray
      */
+
     @Override
     public String  toString() {
         return "Tube{" +
@@ -49,9 +55,10 @@ public class Tube implements Geometry{
 
     /**
      * get Normal
-     * param point
-     * return normal vector from the point to the tube
+     * @param point
+     * @return normal vector from the point to the tube
      */
+
     @Override
     public Vector getNormal(Point point) {
         return null;

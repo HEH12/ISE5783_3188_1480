@@ -6,6 +6,7 @@ import primitives.Vector;
 /**
  * Triangle extends Polygon
  */
+
 public class Triangle extends Polygon{
 
     /**
@@ -14,6 +15,7 @@ public class Triangle extends Polygon{
      * @param p2 type point
      * @param p3 type point
      */
+
     public Triangle(Point p1, Point p2, Point p3) {
         super(p1, p2, p3);
     }
@@ -34,6 +36,7 @@ public class Triangle extends Polygon{
      * @param point
      * @return normal vector from the point to the Triangle
      */
+
     @Override
     public Vector getNormal(Point point) {
         return super.getNormal(point);

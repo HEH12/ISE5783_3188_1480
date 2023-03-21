@@ -3,11 +3,10 @@ package geometries;
 import primitives.Point;
 import primitives.Vector;
 
-public class Sphere implements Geometry{
+public class Sphere extends RadialGeometry{
 
     final Point _center ;
     private double radius;
-
     /**
      * constructor
      * @param center type point
@@ -22,6 +21,7 @@ public class Sphere implements Geometry{
      * get Center
      * @return Center
      */
+
     public Point getCenter() {
         return _center;
     }
@@ -50,6 +50,7 @@ public class Sphere implements Geometry{
      * @param point
      * @return normal vector from the point to sphere
      */
+
     @Override
     public Vector getNormal(Point point) {
         return null;

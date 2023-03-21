@@ -10,32 +10,40 @@ import primitives.Vector;
 public class Plane implements Geometry{
     final  Point _q0;
     final Vector _normal;
-    /**constructor
-     Params:
-     q0 – type point normal – type vector**/
+
+    /**
+     * constructor
+     * @param q0 type point
+     * @param normal type vector
+     */
 
     public Plane(Point q0, Vector normal) {
         _q0 = q0;
         _normal = normal.normalize();
     }
-/**another constructor
- Params:
- q0 q1 q2**/
+    /**
+     * another constructor
+     * @param q0
+     * @param q1
+     * @param q2
+     */
     public Plane(Point q0, Point q1, Point q2) {
         _q0 = q0;
         _normal = null;
     }
-/**get q0
- Returns:
- q0**/
+    /**
+     * get q0
+     * @return q0
+     */
 
     public Point getQ0() {
         return _q0;
     }
 
-/**get normal.
- Returns:
- normal.**/
+    /**
+     * get normal.
+     * @return normal.
+     */
     public Vector getNormal() {
         return _normal;
     }
