@@ -4,7 +4,11 @@ import java.util.Objects;
 @author Hadas Holtzberg 326133188 and Zehavi Perla 326381480**/
 public class Point {
     final Double3 xyz;
-    /**constructor Params:xyz**/
+
+    /**
+     * constructor
+     * @param xyz0
+     */
     public Point(Double3 xyz0) {
         this.xyz = xyz0;
     }
