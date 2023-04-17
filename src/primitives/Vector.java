@@ -111,6 +111,15 @@ public class Vector extends Point {
         double length = length();
         return new Vector(xyz.reduce(length));
     }
+
+    /**
+     * subtract vector from vector
+     * @return vector less vector
+     */
+    public Vector subtract(Vector vector)
+    {
+        return new Vector(xyz.subtract(vector.xyz));
+    }
     @Override
     public String toString() {
         return super.toString();

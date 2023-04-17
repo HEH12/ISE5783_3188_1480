@@ -4,6 +4,8 @@ import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
 
+import static primitives.Util.isZero;
+
 public class Tube extends RadialGeometry{
 
     public double radius;
@@ -61,6 +63,18 @@ public class Tube extends RadialGeometry{
 
     @Override
     public Vector getNormal(Point point) {
-        return null;
+        Point p0 = _ray.getP0();
+        Vector v = _ray.getDir();
+        Vector p0_p = point.subtract(p0);
+
+        double w = v.dotProduct(p0_p);
+
+        if (isZero(w)) {
+            return p0_p;
+        }
+
+        Point startP = p0.add(v.scale(w));
+        Vector n = point.subtract(startP);
+        return n.normalize();
     }
 }
