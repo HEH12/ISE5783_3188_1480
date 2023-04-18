@@ -74,6 +74,7 @@ public class Tube extends RadialGeometry{
         }
 
         Point startP = p0.add(v.scale(w));
+
         Vector n = point.subtract(startP);
         return n.normalize();
     }

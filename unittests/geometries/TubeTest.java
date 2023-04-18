@@ -18,8 +18,8 @@ class TubeTest {
         Ray ray = new Ray(new Point(1, 2, 3), new Vector(2, 3, 4));
         Tube tube = new Tube(3, ray);
         Point point = new Point(1, 1, 3);
-        double a=Math.sqrt(244);
-        assertEquals(new Vector(6/a, 8/a, 12/a), tube.getNormal(point),
+        double a=Math.sqrt(145)*2;
+        assertEquals(new Vector(6/a, -20/a, 12/a), tube.getNormal(point),
                 "Error: Tube getNormal not returning correct value");
     }
 }
