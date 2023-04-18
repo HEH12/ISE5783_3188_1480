@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1c622a87-9da2-49c4-bb80-ce040f9c0ac5" name="Changes" comment="Implementation of geometries primitives' unit testing for&#10;primitives (JUnit). Implementation of normal calculation and their unit testing through&#10;geometries.">
+    <list default="true" id="1c622a87-9da2-49c4-bb80-ce040f9c0ac5" name="Changes" comment="Test correction in the tube department">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/geometries/Tube.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Tube.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unittests/geometries/TubeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/unittests/geometries/TubeTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/geometries/Plane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Plane.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,35 +68,11 @@
       <recent name="primitives" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.TubeTest.testGetNormal">
-    <configuration name="PointTest.testAdd" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.All in ISE5783_3188_1480">
+    <configuration name="All in ISE5783_3188_1480" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ISE5783_3188_1480" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="primitives.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="primitives" />
-      <option name="MAIN_CLASS_NAME" value="primitives.PointTest" />
-      <option name="METHOD_NAME" value="testAdd" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="PointTest.testSubtract" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ISE5783_3188_1480" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="primitives.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="primitives" />
-      <option name="MAIN_CLASS_NAME" value="primitives.PointTest" />
-      <option name="METHOD_NAME" value="testSubtract" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -149,13 +124,29 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="VectorTest.testDotProduct" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ISE5783_3188_1480" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="primitives.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="primitives" />
+      <option name="MAIN_CLASS_NAME" value="primitives.VectorTest" />
+      <option name="METHOD_NAME" value="testDotProduct" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.All in ISE5783_3188_1480" />
+        <item itemvalue="JUnit.VectorTest.testDotProduct" />
         <item itemvalue="JUnit.TubeTest.testGetNormal" />
         <item itemvalue="JUnit.SphereTest.testGetNormal" />
         <item itemvalue="JUnit.TriangleTest" />
-        <item itemvalue="JUnit.PointTest.testSubtract" />
-        <item itemvalue="JUnit.PointTest.testAdd" />
       </list>
     </recent_temporary>
   </component>
@@ -203,7 +194,14 @@
       <option name="project" value="LOCAL‎" />
       <updated>1681767536320</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL‎-00006" summary="Test correction in the tube department">
+      <created>1681800714439</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL‎-00006" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1681800714439</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -212,7 +210,8 @@
     <MESSAGE value="finish level 1" />
     <MESSAGE value="Adding the names of the presenting students" />
     <MESSAGE value="Implementation of geometries primitives' unit testing for&#10;primitives (JUnit). Implementation of normal calculation and their unit testing through&#10;geometries." />
-    <option name="LAST_COMMIT_MESSAGE" value="Implementation of geometries primitives' unit testing for&#10;primitives (JUnit). Implementation of normal calculation and their unit testing through&#10;geometries." />
+    <MESSAGE value="Test correction in the tube department" />
+    <option name="LAST_COMMIT_MESSAGE" value="Test correction in the tube department" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

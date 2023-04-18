@@ -29,7 +29,10 @@ public class Plane implements Geometry{
      */
     public Plane(Point q0, Point q1, Point q2) {
         _q0 = q0;
-        _normal = null;
+        Vector u = q1.subtract(q0);
+        Vector v = q2.subtract(q0);
+        Vector n = u.crossProduct(v);
+        _normal = n.normalize();
     }
     /**
      * get q0
