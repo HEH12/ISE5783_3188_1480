@@ -1,5 +1,8 @@
 package primitives;
 import java.util.Objects;
+
+import static primitives.Util.isZero;
+
 /**class ray is the basic class representing a ray-vector that started from point p0
  @author Hadas Holtzberg 326133188 and Zehavi Perla 326381480**/
 public class Ray {
@@ -50,5 +53,15 @@ public class Ray {
     @Override
     public int hashCode() {
         return Objects.hash(getP0(), getDir());
+    }
+
+    /**
+     * get Point
+     * @param delta
+     * @return p0 + delta
+     */
+    public Point getPoint(double delta ){
+        if (isZero(delta)){return  p0;}
+        return p0.add(dir.normalize().scale(delta));
     }
 }

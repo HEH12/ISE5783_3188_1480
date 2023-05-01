@@ -3,8 +3,13 @@
 package geometries;
 
 import primitives.Point;
+import primitives.Ray;
 import primitives.Vector;
 
+import java.util.List;
+
+import static primitives.Util.alignZero;
+import static primitives.Util.isZero;
 
 
 public class Plane implements Geometry{
@@ -60,5 +65,35 @@ public class Plane implements Geometry{
 
     @Override
     public Vector getNormal(Point point) { return getNormal();}
+    @Override
+    public List<Point> findIntersections(Ray ray) {
+
+        Point P0 = ray.getP0();
+        Vector v = ray.getDir();
+        Vector n = _normal;
+
+        if (_q0.equals(P0)) {//if start of ray equal to q0
+            return null;
+        }
+        Vector P0_Q0 = _q0.subtract(P0);
+        //numerator
+        double nP0Q0 = alignZero(n.dotProduct(P0_Q0));
+        if (isZero(nP0Q0)) {
+            return null;
+        }
+        //denominator
+        double nv = alignZero(n.dotProduct(v));
+        // ray is lying in the plane axis
+        if (isZero(nv)) {
+            return null;
+        }
+        double t = alignZero(nP0Q0 / nv);
+        if (t <= 0) {
+            return null;
+        }
+        Point point = P0.add(v.scale(t));
+        return List.of(point);
+
+    }
 }
 

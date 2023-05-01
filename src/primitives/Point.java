@@ -1,7 +1,7 @@
 package primitives;
 import java.util.Objects;
 /**class point is the basic class representing a point
-@author Hadas Holtzberg 326133188 and Zehavi Perla 326381480**/
+ @author Hadas Holtzberg 326133188 and Zehavi Perla 326381480**/
 public class Point {
     final Double3 xyz;
 
@@ -23,15 +23,14 @@ public class Point {
     public Point(double x, double y, double z) {
         xyz = new Double3(x, y, z);
     }
-    /**
-     *calculate the distance of two point
-     *
-     *
-     * @param p1
-     * @return distance=sqrt(lengthSquare
-     */
+    public double getX() {
+        return xyz.d1;
+    }
 
-   public Vector subtract(Point p1) {
+    public double getY() {
+        return xyz.d2;
+    }
+    public Vector subtract(Point p1) {
         return new Vector(xyz.subtract(p1.xyz));
     }
     /**

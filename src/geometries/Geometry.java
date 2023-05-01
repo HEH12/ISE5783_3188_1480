@@ -1,14 +1,11 @@
 package geometries;
-/**class geometries is the class representing to be an interface to our geometric shapes
- @author Hadas Holtzberg 326133188 and Zehavi Perla 326381480**/
+
 import primitives.Point;
 import primitives.Vector;
 
-public interface Geometry {
-
+public interface Geometry extends Intersectable {
     /**
-     * @param point
-     * @return normal from the point to geometrries
+     * @return normal from the point to geometries
      */
-    public Vector getNormal(Point point);
+    Vector getNormal(Point point);
 }

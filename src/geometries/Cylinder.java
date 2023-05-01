@@ -1,4 +1,4 @@
- /**@author Hadas Holtzberg 326133188 hadashol123@gmail.com and Zehavi Perla 326381480 zehaviperla@gmail.com**/
+/**@author Hadas Holtzberg 326133188 hadashol123@gmail.com and Zehavi Perla 326381480 zehaviperla@gmail.com**/
 package geometries;
 
 import primitives.Point;

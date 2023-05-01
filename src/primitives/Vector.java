@@ -24,15 +24,15 @@ public class Vector extends Point {
 
     public Vector(Double3 xyz) {
         super(xyz);
-            if(xyz.equals(Double3.ZERO)){
-                throw new IllegalArgumentException("Vector(0,0,0) is not allowed");
+        if(xyz.equals(Double3.ZERO)){
+            throw new IllegalArgumentException("Vector(0,0,0) is not allowed");
         }
     }
     /**
      * Sum two vector into a new vector where each couple of numbers
      * is summarized
      *
-     * @param v right handle side operand for addition
+     * @param vector right handle side operand for addition
      * @return result of add
      */
 
@@ -99,8 +99,8 @@ public class Vector extends Point {
      * @return length of vector
      */
 
-   public double length() {
-       return Math.sqrt(lengthSquared());
+    public double length() {
+        return Math.sqrt(lengthSquared());
     }
 
     /**
