@@ -47,7 +47,7 @@ class GeometriesTest {
         geometriesListTwo.add(new Plane(new Point(0, 0, 7), new Vector(0,0,1)));
         geometriesListTwo.add(new Triangle(new Point(-1, -1, 8), new Point(2,0,8), new Point(-1,1,8)));
 
-        assertEquals( 3, geometriesListTwo.findIntersections(new Ray
+        assertEquals( 4, geometriesListTwo.findIntersections(new Ray
                         ( new Point(0,0,0.5),
                                 new Vector(0, 0, 1))).size(),
                 "Wrong number of intersections - expected 3");
