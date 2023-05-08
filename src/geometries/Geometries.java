@@ -9,31 +9,31 @@ import java.util.List;
 
 public class Geometries implements Intersectable  {
 
-    protected List<Intersectable> _intersectList;
+    protected List<Intersectable> intersectables;
 
 
     /**
      * Default constructor
      */
     public Geometries(){
-        _intersectList = new LinkedList<>();
+        intersectables = new LinkedList<>();
     }
 
-    /**
-     * Initialize the geometries based on the geometries received
-     * @param geometries
-     */
-    public Geometries(Intersectable... geometries) {
-        _intersectList = new LinkedList<>();
-        add(geometries);
-    }
+//    /**
+//     * Initialize the geometries based on the geometries received
+//     * @param geometries
+//     */
+//    public Geometries(Intersectable... geometries) {
+//        intersectables = new LinkedList<>();
+//        add(geometries);
+//    }
 
     /**
      * Add new geometries
      * @param geometries
      */
     public void add(Intersectable... geometries){
-        Collections.addAll(_intersectList, geometries);
+        Collections.addAll(intersectables, geometries);
     }
 
     /**
@@ -43,15 +43,15 @@ public class Geometries implements Intersectable  {
      */
     @Override
     public List<Point> findIntersections(Ray ray) {
-        if (_intersectList.isEmpty()) return null; // if have no intersections
+        if (intersectables.isEmpty()) return null; // if have no intersections
         List<Point> result = null;
-        for (var item: _intersectList) { //for all geometries in the list
-            List<Point> itemList = item.findIntersections(ray);
-            if(itemList!=null) {
+        for (var item: intersectables) { //for all geometries in the list
+            List<Point> intersections = item.findIntersections(ray);
+            if(intersections!=null) {
                 if(result==null) {
                     result=new LinkedList<Point>();
                 }
-                result.addAll(itemList);
+                result.addAll(intersections);
             }
         }
         return result;

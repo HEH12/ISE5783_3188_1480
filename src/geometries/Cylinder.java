@@ -51,7 +51,7 @@ public class Cylinder extends Tube {
         return "Cylinder : " +
                 "height=" + height +
                 ", radius=" + radius +
-                ", ray=" + _ray;
+                ", ray=" + ray;
     }
 }
 

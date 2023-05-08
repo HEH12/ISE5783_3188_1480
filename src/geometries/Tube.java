@@ -3,7 +3,6 @@ package geometries;
 import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
-import geometries.RadialGeometry;
 
 import java.util.List;
 
@@ -12,7 +11,7 @@ import static primitives.Util.isZero;
 public class Tube extends RadialGeometry{
 
     public double radius;
-    final Ray _ray;
+    final Ray ray;
 
     /**
      * constructor
@@ -22,7 +21,7 @@ public class Tube extends RadialGeometry{
 
     public Tube(double radius, Ray ray) {
         this.radius = radius;
-        _ray = ray;
+        this.ray = ray;
     }
 
     /**
@@ -41,7 +40,7 @@ public class Tube extends RadialGeometry{
      */
 
     public Ray getRay() {
-        return _ray;
+        return ray;
     }
 
 
@@ -54,7 +53,7 @@ public class Tube extends RadialGeometry{
     public String  toString() {
         return "Tube{" +
                 "radius=" + radius +
-                ", ray=" + _ray +
+                ", ray=" + ray +
                 '}';
     }
 
@@ -66,8 +65,8 @@ public class Tube extends RadialGeometry{
 
     @Override
     public Vector getNormal(Point point) {
-        Point p0 = _ray.getP0();
-        Vector v = _ray.getDir();
+        Point p0 = ray.getP0();
+        Vector v = ray.getDir();
         Vector p0_p = point.subtract(p0);
 
         double w = v.dotProduct(p0_p);

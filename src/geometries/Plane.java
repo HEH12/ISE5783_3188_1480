@@ -13,8 +13,8 @@ import static primitives.Util.isZero;
 
 
 public class Plane implements Geometry{
-    final  Point _q0;
-    final Vector _normal;
+    final  Point q0;
+    final Vector normal;
 
     /**
      * constructor
@@ -23,8 +23,8 @@ public class Plane implements Geometry{
      */
 
     public Plane(Point q0, Vector normal) {
-        _q0 = q0;
-        _normal = normal.normalize();
+        this.q0=q0;
+        this.normal = normal.normalize();
     }
     /**
      * another constructor
@@ -33,11 +33,11 @@ public class Plane implements Geometry{
      * @param q2
      */
     public Plane(Point q0, Point q1, Point q2) {
-        _q0 = q0;
+        this.q0 = q0;
         Vector u = q1.subtract(q0);
         Vector v = q2.subtract(q0);
         Vector n = u.crossProduct(v);
-        _normal = n.normalize();
+        this.normal = n.normalize();
     }
     /**
      * get q0
@@ -45,7 +45,7 @@ public class Plane implements Geometry{
      */
 
     public Point getQ0() {
-        return _q0;
+        return q0;
     }
 
     /**
@@ -53,29 +53,34 @@ public class Plane implements Geometry{
      * @return normal.
      */
     public Vector getNormal() {
-        return _normal;
+        return this.normal;
     }
 
     @Override
     public String toString() {
         return "Plane : " +
-                "point=" + _q0 +
-                ", normal=" + _normal;
+                "point=" + q0 +
+                ", normal=" + this.normal;
     }
 
     @Override
     public Vector getNormal(Point point) { return getNormal();}
+    /**
+     * findIntersections find intersections between the plane to ray
+     * @param ray The Ray to intersect
+     * @return list of point that intersections between the plane to ray
+     */
     @Override
     public List<Point> findIntersections(Ray ray) {
 
         Point P0 = ray.getP0();
         Vector v = ray.getDir();
-        Vector n = _normal;
+        Vector n = this.normal;
 
-        if (_q0.equals(P0)) {//if start of ray equal to q0
+        if (this.q0.equals(P0)) {//if start of ray equal to q0
             return null;
         }
-        Vector P0_Q0 = _q0.subtract(P0);
+        Vector P0_Q0 = this.q0.subtract(P0);
         //numerator
         double nP0Q0 = alignZero(n.dotProduct(P0_Q0));
         if (isZero(nP0Q0)) {

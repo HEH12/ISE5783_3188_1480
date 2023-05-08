@@ -10,7 +10,7 @@ import static primitives.Util.alignZero;
 
 public class Sphere extends RadialGeometry{
 
-    final Point _center ;
+    final Point center ;
     private double radius;
     /**
      * constructor
@@ -18,7 +18,7 @@ public class Sphere extends RadialGeometry{
      * @param radius type double
      */
     public Sphere(Point center, double radius) {
-        _center = center;
+        this.center = center;
         this.radius = radius;
     }
 
@@ -28,7 +28,7 @@ public class Sphere extends RadialGeometry{
      */
 
     public Point getCenter() {
-        return _center;
+        return center;
     }
 
     /**
@@ -45,7 +45,7 @@ public class Sphere extends RadialGeometry{
     @Override
     public String toString() {
         return "Sphere : " +
-                "center=" + _center +
+                "center=" + this.center +
                 ", radius=" + radius ;
     }
 
@@ -59,7 +59,7 @@ public class Sphere extends RadialGeometry{
     @Override
     public Vector getNormal(Point point) {
 
-        Vector n = point.subtract(_center);
+        Vector n = point.subtract(this.center);
         return n.normalize();
     }
     /**
@@ -72,11 +72,11 @@ public class Sphere extends RadialGeometry{
         Point P0 = ray.getP0();        //get point of start ray
         Vector v = ray.getDir();      //get dir of ray
 
-        if (P0.equals(_center)) {    //if start of ray equal to the sphere's center
-            return List.of(_center.add(v.scale(radius)));
+        if (P0.equals(this.center)) {    //if start of ray equal to the sphere's center
+            return List.of(this.center.add(v.scale(radius)));
         }
 
-        Vector U = _center.subtract(P0);
+        Vector U = this.center.subtract(P0);
 
         double tm = alignZero(v.dotProduct(U));
         double d = alignZero(Math.sqrt(U.lengthSquared() - tm * tm));

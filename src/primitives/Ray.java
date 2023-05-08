@@ -61,7 +61,9 @@ public class Ray {
      * @return p0 + delta
      */
     public Point getPoint(double delta ){
-        if (isZero(delta)){return  p0;}
+        if (isZero(delta)){
+            return  p0;
+        }
         return p0.add(dir.normalize().scale(delta));
     }
 }
