@@ -18,15 +18,14 @@ public class Geometries implements Intersectable  {
     public Geometries(){
         intersectables = new LinkedList<>();
     }
-
-//    /**
-//     * Initialize the geometries based on the geometries received
-//     * @param geometries
-//     */
-//    public Geometries(Intersectable... geometries) {
-//        intersectables = new LinkedList<>();
-//        add(geometries);
-//    }
+    /**
+     * Initialize the geometries based on the geometries received
+     * @param geometries
+     */
+    public Geometries(Intersectable... geometries) {
+       intersectables = new LinkedList<>();
+       add(geometries);
+   }
 
     /**
      * Add new geometries

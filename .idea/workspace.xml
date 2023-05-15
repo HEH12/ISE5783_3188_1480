@@ -4,17 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1c622a87-9da2-49c4-bb80-ce040f9c0ac5" name="Changes" comment="Building a camera and creating rays from it">
-      <change afterPath="$PROJECT_DIR$/src/renderer/Camera.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/unittests/renderer/IntegrationTest.java" afterDir="false" />
+    <list default="true" id="1c622a87-9da2-49c4-bb80-ce040f9c0ac5" name="Changes" comment="adding scene and color and light and proper tests">
+      <change afterPath="$PROJECT_DIR$/src/lighting/AmbientLight.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/primitives/Color.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/renderer/ImageWriter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/renderer/RayTracerBase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/renderer/RayTracerBasic.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/scene/Scene.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/unittests/renderer/CameraTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/unittests/renderer/ImageWriterTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/unittests/renderer/RenderTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/geometries/Cylinder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Cylinder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/geometries/Geometries.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Geometries.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/geometries/Plane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Plane.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/geometries/Sphere.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Sphere.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/geometries/Triangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Triangle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/geometries/Tube.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Tube.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/primitives/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitives/Point.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/primitives/Ray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitives/Ray.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/renderer/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/Camera.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,6 +94,7 @@
       <recent name="" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="renderer" />
       <recent name="geometries" />
       <recent name="primitives" />
     </key>
@@ -117,7 +123,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="IntegrationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ImageWriterTest.testWriteToImage" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ISE5783_3188_1480" />
       <extension name="coverage">
         <pattern>
@@ -126,22 +132,23 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="renderer" />
-      <option name="MAIN_CLASS_NAME" value="renderer.IntegrationTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="MAIN_CLASS_NAME" value="renderer.ImageWriterTest" />
+      <option name="METHOD_NAME" value="testWriteToImage" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TriangleTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="RenderTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ISE5783_3188_1480" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="geometries.*" />
+          <option name="PATTERN" value="renderer.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="geometries" />
-      <option name="MAIN_CLASS_NAME" value="geometries.TriangleTest" />
+      <option name="PACKAGE_NAME" value="renderer" />
+      <option name="MAIN_CLASS_NAME" value="renderer.RenderTests" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -164,10 +171,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.All in ISE5783_3188_1480" />
-        <item itemvalue="JUnit.test in ISE5783_3188_1480" />
-        <item itemvalue="JUnit.IntegrationTest" />
+        <item itemvalue="JUnit.RenderTests" />
+        <item itemvalue="JUnit.ImageWriterTest.testWriteToImage" />
         <item itemvalue="JUnit.CameraTest" />
-        <item itemvalue="JUnit.TriangleTest" />
+        <item itemvalue="JUnit.test in ISE5783_3188_1480" />
       </list>
     </recent_temporary>
   </component>
@@ -243,7 +250,14 @@
       <option name="project" value="LOCAL‎" />
       <updated>1683019609957</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL‎-00010" summary="Building a camera and creating rays from it">
+      <created>1683583848796</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL‎-00010" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1683583848796</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -257,7 +271,8 @@
     <MESSAGE value="adding intersection for the geometries and properly test" />
     <MESSAGE value="Update in the plane department" />
     <MESSAGE value="Building a camera and creating rays from it" />
-    <option name="LAST_COMMIT_MESSAGE" value="Building a camera and creating rays from it" />
+    <MESSAGE value="adding scene and color and light and proper tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding scene and color and light and proper tests" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

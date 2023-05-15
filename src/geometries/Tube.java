@@ -73,6 +73,7 @@ public class Tube extends RadialGeometry{
 
         if (isZero(w)) {
             return p0_p;
+
         }
 
         Point startP = p0.add(v.scale(w));

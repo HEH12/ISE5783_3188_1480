@@ -3,6 +3,7 @@ import java.util.Objects;
 /**class point is the basic class representing a point
  @author Hadas Holtzberg 326133188 and Zehavi Perla 326381480**/
 public class Point {
+    public static final Point ZERO =new Point(0,0,0) ;
     final Double3 xyz;
 
     /**
