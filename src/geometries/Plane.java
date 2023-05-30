@@ -12,7 +12,7 @@ import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
 
 
-public class Plane implements Geometry{
+public class Plane extends Geometry{
     final  Point q0;
     final Vector normal;
 
@@ -65,22 +65,22 @@ public class Plane implements Geometry{
 
     @Override
     public Vector getNormal(Point point) { return getNormal();}
+
     /**
      * findIntersections find intersections between the plane to ray
      * @param ray The Ray to intersect
      * @return list of point that intersections between the plane to ray
      */
     @Override
-    public List<Point> findIntersections(Ray ray) {
-
+    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
         Point P0 = ray.getP0();
         Vector v = ray.getDir();
-        Vector n = this.normal;
+        Vector n = normal;
 
-        if (this.q0.equals(P0)) {//if start of ray equal to q0
+        if (q0.equals(P0)) {//if start of ray equal to q0
             return null;
         }
-        Vector P0_Q0 = this.q0.subtract(P0);
+        Vector P0_Q0 = q0.subtract(P0);
         //numerator
         double nP0Q0 = alignZero(n.dotProduct(P0_Q0));
         if (isZero(nP0Q0)) {
@@ -96,9 +96,7 @@ public class Plane implements Geometry{
         if (t <= 0) {
             return null;
         }
-        Point point = P0.add(v.scale(t));
-        return List.of(point);
-
+        return List.of(new GeoPoint(this, ray.getPoint(t)));
     }
 }
 

@@ -17,26 +17,26 @@ class GeometriesTest {
     @Test
     void TestFindIntersections() {
 
-        Geometries geometriesListOne = new Geometries();
+        Geometries geometries = new Geometries();
 
         // =============== Boundary Values Tests ==================
 
         // TC01: Empty geometry list (0 points)
-        assertNull( geometriesListOne.findIntersections(new Ray(new Point(1, 1, 1), new Vector(2, 1, 1)))
+        assertNull( geometries.findIntersections(new Ray(new Point(1, 1, 1), new Vector(2, 1, 1)))
                 , "Empty geometries - should return null");
 
-        geometriesListOne.add(new Sphere(new Point(1, 0, 0), 1.0));
-        geometriesListOne.add(new Plane(new Point(1, 1, 0), new Vector(0, 0, 1)));
-        geometriesListOne.add(new Triangle(new Point(1, 0, 0), new Point(0, 1, 0), new Point(0, 0, 1)));
+        geometries.add(new Sphere(new Point(1, 0, 0), 1.0));
+        geometries.add(new Plane(new Point(1, 1, 0), new Vector(0, 0, 1)));
+        geometries.add(new Triangle(new Point(1, 0, 0), new Point(0, 1, 0), new Point(0, 0, 1)));
 
         //TC02: No intersections with any geometry (0 points)
-        assertNull(geometriesListOne.findIntersections(new Ray
+        assertNull(geometries.findIntersections(new Ray
                         (new Point(0.0, 0.0, 2.0),
                                 new Vector(0.0, -1.0, 0.0))),
                 "No intersections - should return null");
 
         //TC03: One intersection with one geometry (1 point)
-        assertEquals(1, geometriesListOne.findIntersections(new Ray
+        assertEquals(1, geometries.findIntersections(new Ray
                         (new Point(0, 5, -1),
                                 new Vector(0, 0, 1))).size(),
                 "Wrong number of intersections - expected 1");
@@ -57,7 +57,7 @@ class GeometriesTest {
         // ============ Equivalence Partitions Tests ==============
 
         // TC05: Few Geometries are intersected, but not all of them (2 points)
-        assertEquals(2, geometriesListOne.findIntersections(new Ray
+        assertEquals(2, geometries.findIntersections(new Ray
                         (new Point(1.0, 0.0, -1.0),
                                 new Vector(0.0, 0.0, 1.0))).size(),
                 "Wrong number of intersections - expected 2");

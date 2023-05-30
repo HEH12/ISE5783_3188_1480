@@ -3,35 +3,31 @@ package lighting;
 import primitives.Color;
 import primitives.Double3;
 
-/**
- * AmbientLight for all 3D objects
- */
-public class   AmbientLight {
+public class AmbientLight extends Light {
 
-    public static final AmbientLight NONE = null ;
-    private final Color intensity;
+
+    public static AmbientLight NONE = new AmbientLight(Color.BLACK, Double3.ZERO);
+
 
     /**
-     * Constructor
-     * @param Ia illumination color of light
-     * @param Ka attenuation factor
+     * primary constructor
+     * calls super constructor
+     *
+     * @param Ia Color intensity
+     * @param Ka intensity factor
      */
     public AmbientLight(Color Ia, Double3 Ka) {
-        intensity = Ia.scale(Ka);
+        super(Ia.scale(Ka));
     }
 
+
     /**
-     * Default constructor
+     * default constructor sets the intensity to black
+     * calls super constructor
      */
     public AmbientLight() {
-        intensity = Color.BLACK;
-    }
-
-    /**
-     * get Intensity -> reset intensity
-     * @return intensity
-     */
-    public Color getIntensity() {
-        return intensity;
+        super(Color.BLACK);
     }
 }
+
+

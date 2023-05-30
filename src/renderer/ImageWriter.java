@@ -18,6 +18,7 @@ import javax.imageio.*;
  * @author Dan
  */
 public class ImageWriter {
+    private double imageWidth, imageHeight;
     private int nX;
     private int nY;
 
@@ -39,6 +40,15 @@ public class ImageWriter {
         this.imageName = imageName;
         this.nX = nX;
         this.nY = nY;
+
+        image = new BufferedImage(nX, nY, BufferedImage.TYPE_INT_RGB);
+    }
+    public ImageWriter(String imageName, double width, double height, int nX, int nY) {
+        imageName = imageName;
+        imageWidth = width;
+        imageHeight = height;
+        nX = nX;
+        nY = nY;
 
         image = new BufferedImage(nX, nY, BufferedImage.TYPE_INT_RGB);
     }
@@ -88,6 +98,9 @@ public class ImageWriter {
      */
     public void writePixel(int xIndex, int yIndex, Color color) {
         image.setRGB(xIndex, yIndex, color.getColor().getRGB());
+    }
+    public void writePixel(int xIndex, int yIndex, java.awt.Color color){
+        image.setRGB(xIndex, yIndex, color.getRGB());
     }
 
 }

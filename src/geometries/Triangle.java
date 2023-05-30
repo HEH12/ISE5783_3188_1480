@@ -2,7 +2,10 @@ package geometries;
 
 import java.util.List;
 import primitives.Point;
+import primitives.Ray;
 import primitives.Vector;
+
+import static primitives.Util.isZero;
 
 public class Triangle extends Polygon {
 
@@ -45,14 +48,14 @@ public class Triangle extends Polygon {
      * @return list of point that intersections between the triangle to ray
      */
     @Override
-    public java.util.List<primitives.Point> findIntersections(primitives.Ray ray) {
-
-        List<Point> result = plane.findIntersections(ray);
+    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+        List<GeoPoint> result = plane.findGeoIntersections(ray);
         if (result == null) {
             return null;
         }
         Point p0 = ray.getP0();
         Vector v = ray.getDir();
+
         Point p1 = vertices.get(0);
         Point p2 = vertices.get(1);
         Point p3 = vertices.get(2);
@@ -61,18 +64,25 @@ public class Triangle extends Polygon {
         Vector v2 = p2.subtract(p0);// p0->p2
         Vector v3 = p3.subtract(p0);//p0->p3
 
-        Vector n1 = v1.crossProduct(v2);
-        Vector n2 = v2.crossProduct(v3);
-        Vector n3 = v3.crossProduct(v1);
-
-        double s1 = n1.dotProduct(v);
-        double s2 = n2.dotProduct(v);
-        double s3 = n3.dotProduct(v);
-
-        if (s1 > 0 && s2 > 0 && s3 > 0 || s1 < 0 && s2 < 0 && s3 < 0) {
-            return result;
+        double n1 = v.dotProduct(v1.crossProduct(v2));
+        if (isZero(n1)) {
+            return null;
         }
 
-        return super.findIntersections(ray);
+        double n2 = v.dotProduct(v2.crossProduct(v3));
+        if (isZero(n2)) {
+            return null;
+        }
+
+        double n3 = v.dotProduct(v3.crossProduct(v1));
+        if (isZero(n3)) {
+            return null;
+        }
+
+
+        if (!((n1 < 0 && n2 < 0 && n3 < 0) || (n1 > 0 && n2 > 0 && n3 > 0))) {
+            return null;
+        }
+        return List.of(new GeoPoint(this, result.get(0).point));
     }
 }

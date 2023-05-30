@@ -22,11 +22,11 @@ public class IntegrationTest {
 
     //create camera
     Camera camera1 = new Camera(new Point(0, 0, 0), new Vector(0, 0, -1), new Vector(0, 1, 0))
-            .setViewPlaneSize(3, 3)
-            .setViewPlaneDistance(1);
+            .setVPSize(3, 3)
+            .setVPDistance(1);
     Camera camera2 = new Camera(new Point(0, 0, 0.5), new Vector(0, 0, -1), new Vector(0, 1, 0))
-            .setViewPlaneSize(3, 3)
-            .setViewPlaneDistance(1);
+            .setVPSize(3, 3)
+            .setVPDistance(1);
 
     /**
      * Sphere integration
