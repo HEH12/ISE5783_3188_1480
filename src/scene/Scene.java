@@ -53,4 +53,5 @@ public class Scene {
         this.lights = lights;
         return this;
     }
+
 }

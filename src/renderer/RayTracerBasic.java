@@ -23,11 +23,11 @@ public class RayTracerBasic extends RayTracerBase {
 
     private static final int MAX_CALC_COLOR_LEVEL = 10;
     private static final double MIN_CALC_COLOR_K = 0.001;
+    private static final double DELTA = 0.1;
     private boolean bb;
 
     /**
      * constructor
-     * @param scene
      */
     public RayTracerBasic(Scene scene) {
         super(scene);
@@ -35,7 +35,6 @@ public class RayTracerBasic extends RayTracerBase {
 
     /**
      * setBb
-     * @param bb
      * @return bb
      */
     public RayTracerBase setBb(boolean bb) {
@@ -45,7 +44,6 @@ public class RayTracerBasic extends RayTracerBase {
 
     /**
      * findClosestIntersection
-     * @param ray
      * @return list of the Closest Intersection point
      */
     private Point findClosestIntersection(Ray ray) {
@@ -77,8 +75,6 @@ public class RayTracerBasic extends RayTracerBase {
 
     /**
      * calcColor
-     * @param gp
-     * @param ray
      * @return the color
      */
     private Color calcColor(GeoPoint gp, Ray ray) {
@@ -89,8 +85,6 @@ public class RayTracerBasic extends RayTracerBase {
 
     /**
      * calcLocalEffects
-     * @param gp
-     * @param ray
      * @return color effects
      */
     private Color calcLocalEffects(Intersectable.GeoPoint gp, Ray ray) {
@@ -106,11 +100,12 @@ public class RayTracerBasic extends RayTracerBase {
             Vector l = lightSource.getL(gp.point);
             double nl = alignZero(n.dotProduct(l));
             if (nl * nv > 0) {
-                //if (unshaded(gp, l)) {
-                Color iL = lightSource.getIntensity(gp.point);
-                color = color.add(iL.scale(calcDiffusive(material, nl)),
-                        iL.scale(calcSpecular(material, n, l, nl, v)));
-                //}
+                if (unshaded(gp, lightSource, n, nl, nv)) {
+                    Color iL = lightSource.getIntensity(gp.point);
+                    color = color.add(
+                            iL.scale(calcDiffusive(material, nl)),
+                            iL.scale(calcSpecular(material, n, l, nl, v)));
+                }
             }
         }
         return color;
@@ -118,22 +113,34 @@ public class RayTracerBasic extends RayTracerBase {
 
     /**
      * unshaded
-     * @param gp
-     * @param l
      * @return if has unshaded
      */
-    private boolean unshaded(GeoPoint gp, Vector l) {
+    private boolean unshaded(GeoPoint gp, LightSource lightSource, Vector n, double nl, double nv) {
+        Point point = gp.point;
+        Vector l = lightSource.getL(point);
         Vector lightDirection = l.scale(-1); // from point to light source
-        Ray lightRay = new Ray(gp.point, lightDirection);
-        List<GeoPoint> intersections = scene.geometries.findGeoIntersections(lightRay);
-        return intersections == null;
+        Vector delVector = n.scale(nv < 0 ? DELTA : -DELTA);
+        Point pointRay = (point.add(delVector));
+        Ray lightRay = new Ray(pointRay, lightDirection);
+        List<GeoPoint> intersections = scene.getGeometries().findGeoIntersections(lightRay);
+        if(intersections == null){
+            return  true;
+        }
+        double maxDistance = lightSource.getDistance(point);
+        if (intersections == null) {
+            return true;
+        }
+        for (GeoPoint geoPoint : intersections) {
+            double distance = geoPoint.point.distance(point);
+            if (distance >= maxDistance) {
+                intersections.remove(geoPoint);
+            }
+        }
+        return intersections.isEmpty();
     }
 
     /**
      * calcDiffusive
-     * @param material
-     * @param nl
-     * @return
      */
     private Double3 calcDiffusive(Material material, double nl) {
         return material.kD.scale(Math.abs(nl));
@@ -142,10 +149,6 @@ public class RayTracerBasic extends RayTracerBase {
     /**
      * calcSpecular
      * @param material of the geometry
-     * @param n
-     * @param l
-     * @param nl
-     * @param v
      * @return scale of the geometry
      */
     private Double3 calcSpecular(Material material, Vector n, Vector l, double nl, Vector v) {
