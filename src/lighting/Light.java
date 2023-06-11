@@ -2,15 +2,13 @@ package lighting;
 
 import primitives.Color;
 
-/**
- * Abstract class represents light
+/** Abstract class represents light
  */
 abstract class Light {
     // Field represents intensity in color
     private Color intensity;
 
-    /**
-     * Constructor for Light
+    /** Constructor for Light
      * @param intensity parameter for field intensity
      */
     protected Light(Color intensity) {
@@ -25,4 +23,3 @@ abstract class Light {
         return intensity;
     }
 }
-

@@ -87,10 +87,11 @@ public class Polygon extends Geometry {
      * @return list of point that intersections between the polygon to ray
      */
     @Override
-    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
-        List<GeoPoint> result = plane.findGeoIntersections(ray);
-        if (result == null) {
-            return result;
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
+        List<GeoPoint> planeIntersections = plane.findGeoIntersections(ray);
+
+        if (planeIntersections == null) {
+            return null;
         }
 
         Point P0 = ray.getP0();
@@ -99,8 +100,8 @@ public class Polygon extends Geometry {
         Point P1 = vertices.get(1);
         Point P2 = vertices.get(0);
 
-        Vector v1 = P1.subtract(P0);
-        Vector v2 = P2.subtract(P0);
+        Vector v1 = P0.subtract(P1);
+        Vector v2 = P0.subtract(P2);
 
         double sign = alignZero(v.dotProduct(v1.crossProduct(v2)));
 
@@ -113,7 +114,7 @@ public class Polygon extends Geometry {
         //iterate through all vertices of the polygon
         for (int i = vertices.size() - 1; i > 0; --i) {
             v1 = v2;
-            v2 = vertices.get(i).subtract(P0);
+            v2 = P0.subtract(vertices.get(i));
 
             sign = alignZero(v.dotProduct(v1.crossProduct(v2)));
             if (isZero(sign)) {
@@ -124,7 +125,8 @@ public class Polygon extends Geometry {
                 return null;
             }
         }
+        Point point = planeIntersections.get(0).point;
 
-        return result;
+        return List.of(new GeoPoint(this,point));
     }
 }

@@ -1,135 +1,140 @@
 package primitives;
-import static primitives.Util.isZero;
-/**class vector is the basic class representing a vector that started from 0,0,0
- @author Hadas Holtzberg 326133188 and Zehavi Perla 326381480**/
+
+/**
+ * this class represents a Vector in 3D Cartesian coordinates
+ * the class inherits  {@link Point}
+ * the vector is represents starting from  all three axis origins: Point(0.0.0)
+ *
+ * @author Hadas Holtzberg and Zehavi perla
+ *
+ */
 public class Vector extends Point {
+
     /**
-     *constructor
-     * @param x coordinate value for x axis
-     * @param y coordinate value for y axis
-     * @param z coordinate value for z axis
+     * primary Constructor for Vector
+     *
+     * @param x coordinate value for X axis
+     * @param y coordinate value for Y axis
+     * @param z coordinate value for Z axis
      */
     public Vector(double x, double y, double z) {
         this(new Double3(x, y, z));
-        if(xyz.equals(Double3.ZERO))
-            throw new IllegalArgumentException("Vector(0,0,0) is not allowed");
-
     }
-    /**
-     * throw exception if the vector is zero vector
-     *
-     * another constructor
-     * @param xyz
-     */
 
+    /**
+     * secondary  constructor for Vector class
+     *
+     * @param xyz {@link Double3 } head values of vector
+     */
     public Vector(Double3 xyz) {
         super(xyz);
-        if(xyz.equals(Double3.ZERO)){
+        if (this.xyz.equals(Double3.ZERO)) {
             throw new IllegalArgumentException("Vector(0,0,0) is not allowed");
         }
     }
-    /**
-     * Sum two vector into a new vector where each couple of numbers
-     * is summarized
-     *
-     * @param vector right handle side operand for addition
-     * @return result of add
-     */
 
-    public Vector add(Vector vector) {
-        return new Vector(xyz.add(vector.xyz));
+    public Vector(Point target) {
+        this(target.xyz);
     }
-    /**
-     *Scale (multiply) vector by a number into a new vector
-     *
-     * @param scalar right handle side operand for scaling
-     * @return result of scale
-     */
-    public Vector scale(double scalar) {
-        if (isZero(scalar)) {
-            throw new IllegalArgumentException("scale by zero not allowed");
-        }
-        return new Vector(xyz.scale(scalar));
-    }
-    /**
-     * dot product between two vectors (scalar product)
-     *
-     * @param other the right vector of U.V
-     * @return scalar value of the dot product
-     * @link https://www.mathsisfun.com/algebra/vectors-dot-product.html
-     */
 
-    public double dotProduct(Vector other) {
-        return xyz.d1 * other.xyz.d1 +
-                xyz.d2 * other.xyz.d2 +
-                xyz.d3 * other.xyz.d3;
-    }
     /**
-     * cross product between two vectors (vectorial product)
-     * @param other other the right vector of U.V
-     * @return the vector resulting from the cross product (Right-hand rule)
-     * link cuemath.com/geometry/cross-product/
-     */
-
-    public Vector crossProduct(Vector other) {
-        double ax = xyz.d1;
-        double ay = xyz.d2;
-        double az = xyz.d3;
-        double bx = other.xyz.d1;
-        double by = other.xyz.d2;
-        double bz = other.xyz.d3;
-        if (bx == 0 && by == 0 && bz == 0) {
-            throw new IllegalArgumentException("parallel vectors- CROS PRODUCT");
-        }
-        return new Vector(ay*bz-by*az, -ax*bz+az*bx, ax*by-ay*bx);
-    }
-    /**
+     * this method provide the lengthSquared of the Vector in double
      *
-     * @return length Squared of vector
+     * @return the squared length
      */
-
-    public double lengthSquared()
-    {
-        return xyz.d1 * xyz.d1 +
-                xyz.d2 * xyz.d2 +
-                xyz.d3 * xyz.d3;
+    public double lengthSquared() {
+        return xyz.d1 * xyz.d1
+                + xyz.d2 * xyz.d2
+                + xyz.d3 * xyz.d3;
     }
-    /**
-     *
-     * @return length of vector
-     */
 
+    /**
+     * this method provide the length of the Vector
+     *
+     * @return the length of the Vector in double
+     */
     public double length() {
         return Math.sqrt(lengthSquared());
     }
 
     /**
-     * Divides the vector by its length
-     * @return normalize vector
+     * dot product between two vectors (scalar product)
+     *
+     * @param other the right vector of U.V
+     * @return scalar value of the dot product
+     *
+     * {@see  https://www.mathsisfun.com/algebra/vectors-dot-product.html}
      */
-    public Vector normalize() {
-        double length = length();
-        return new Vector(xyz.reduce(length));
+    public double dotProduct(Vector other) {
+        return xyz.d1 * other.xyz.d1
+                + xyz.d2 * other.xyz.d2
+                + xyz.d3 * other.xyz.d3;
     }
 
     /**
-     * subtract vector from vector
-     * @return vector less vector
+     * cross product between two vectors (vectorial product)
+     *
+     * @param other other the right vector of U.V
+     * @return the vector resulting from the cross product (Right-hand rule)
+     * {@see https://www.mathsisfun.com/algebra/vectors-cross-product.html}
      */
-    public Vector subtract(Vector vector)
-    {
-        return new Vector(xyz.subtract(vector.xyz));
+    public Vector crossProduct(Vector other) {
+        double ax = xyz.d1;
+        double ay = xyz.d2;
+        double az = xyz.d3;
+
+        double bx = other.xyz.d1;
+        double by = other.xyz.d2;
+        double bz = other.xyz.d3;
+
+        double cx = ay * bz - az * by;
+        double cy = az * bx - ax * bz;
+        double cz = ax * by - ay * bx;
+
+
+        return new Vector(cx, cy, cz);
     }
+
+    /**
+     * normalizing a vector so it's length will be 1
+     *
+     * @return new Vector in the sme direction with length equal to 1
+     */
+    public Vector normalize() {
+        double len = length();
+        return new Vector(xyz.reduce(len));
+    }
+
+    /**
+     * subtract between this vector and another one
+     * @param other  the second vector
+     * @return new vector from this vector to the other vector
+     */
+    public Vector subtract(Vector other) {
+        return new Vector(xyz.subtract(other.xyz));
+    }
+
+    @Override
+    public Vector add(Vector vector) {
+        return new Vector(xyz.add(vector.xyz));
+    }
+
     @Override
     public String toString() {
-        return super.toString();
+        return "Vector{" +
+                "xyz=" + xyz +
+                '}';
     }
-    @Override
-    public boolean equals(Object o) {
-        return super.equals(o);
+
+    /**
+     * extending the vector to a specific length
+     * @param delta the length
+     * @return new extended Vector
+     */
+
+
+    public Vector scale(double delta) {
+        return new Vector(xyz.scale(delta));
     }
+
 }
-
-
-
-

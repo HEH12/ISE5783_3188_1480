@@ -66,37 +66,45 @@ public class Plane extends Geometry{
     @Override
     public Vector getNormal(Point point) { return getNormal();}
 
-    /**
-     * findIntersections find intersections between the plane to ray
-     * @param ray The Ray to intersect
-     * @return list of point that intersections between the plane to ray
-     */
+
     @Override
-    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
         Point P0 = ray.getP0();
         Vector v = ray.getDir();
-        Vector n = normal;
 
-        if (q0.equals(P0)) {//if start of ray equal to q0
-            return null;
-        }
-        Vector P0_Q0 = q0.subtract(P0);
-        //numerator
-        double nP0Q0 = alignZero(n.dotProduct(P0_Q0));
-        if (isZero(nP0Q0)) {
-            return null;
-        }
+        Vector n = normal;
         //denominator
         double nv = alignZero(n.dotProduct(v));
+
         // ray is lying in the plane axis
         if (isZero(nv)) {
             return null;
         }
-        double t = alignZero(nP0Q0 / nv);
-        if (t <= 0) {
+
+        //ray cannot start from the plane
+        if (q0.equals(P0)) {
             return null;
         }
-        return List.of(new GeoPoint(this, ray.getPoint(t)));
+
+        Vector P0_Q0 = q0.subtract(P0);
+
+        //numerator
+        double nP0Q0 = alignZero(n.dotProduct(P0_Q0));
+
+        // ray parallel to the plane
+        if (isZero(nP0Q0)) {
+            return null;
+        }
+
+        double t = alignZero(nP0Q0 / nv);
+
+        if (t < 0 ||  alignZero(t - maxDistance) > 0) {
+            return null;
+        }
+
+        Point point = ray.getPoint(t);
+
+        return List.of(new GeoPoint(this, point));
     }
 }
 

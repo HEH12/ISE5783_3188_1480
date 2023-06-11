@@ -20,6 +20,15 @@ public class Scene {
         this.name = name;
         geometries = new Geometries();
         background = Color.BLACK;
+        lights = new LinkedList<>();
+        ambientLight = new AmbientLight();
+    }
+    /**
+     * getLights
+     * @return Lights
+     */
+    public List<LightSource> getLights() {
+        return lights;
     }
 
     public Scene setBackground(Color background) {

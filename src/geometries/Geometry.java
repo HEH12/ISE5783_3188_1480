@@ -9,6 +9,7 @@ import primitives.Vector;
 
 
  public abstract class Geometry extends Intersectable {
+     protected  Vector normal;
      private Material material;
      public Geometry() {
          this.emission = Color.BLACK;

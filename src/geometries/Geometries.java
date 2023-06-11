@@ -32,20 +32,11 @@ public class Geometries extends Intersectable {
         Collections.addAll(intersectList, geometries);
     }
 
-    /**
-     * findIntersections find intersections between the geometries to ray
-     * @param ray The Ray to intersect
-     * @return list of point that intersections between the geometries to ray
-     */
-
     @Override
-    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
-        if (intersectList.isEmpty()) {
-            return null;                                         // if have no intersections
-        }
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
         List<GeoPoint> result = null;
-        for (var item : intersectList) {                        // for all geometries in the list
-            List<GeoPoint> itemList = item.findGeoIntersections(ray); // find intersections
+        for (Intersectable item : intersectList) {
+            List<GeoPoint> itemList = item.findGeoIntersectionsHelper(ray, maxDistance);
             if (itemList != null) {
                 if (result == null) {
                     result = new LinkedList<>();
@@ -54,6 +45,9 @@ public class Geometries extends Intersectable {
             }
         }
         return result;
+
     }
+
+
 }
 

@@ -11,11 +11,11 @@ import primitives.*;
 import renderer.*;
 import scene.Scene;
 
-/** Test rendering a basic image
- * @author Dan */
+/**  Test rendering a basic image
+        * @author Dan */
 public class RenderTests {
 
-    /** Produce a scene with basic 3D model and render it into a png image with a
+    /**Produce a scene with basic 3D model and render it into a png image with a
      * grid */
     @Test
     public void basicRenderTwoColorTest() {
@@ -44,7 +44,7 @@ public class RenderTests {
     }
 
     // For stage 6 - please disregard in stage 5
-    /** Produce a scene with basic 3D model - including individual lights of the
+    /**Produce a scene with basic 3D model - including individual lights of the
      * bodies and render it into a png image with a grid */
     @Test
     public void basicRenderMultiColorTest() {
@@ -91,4 +91,5 @@ public class RenderTests {
         camera.printGrid(100, new Color(YELLOW));
         camera.writeToImage();
     }
+
 }

@@ -101,6 +101,16 @@ public class Color {
             throw new IllegalArgumentException("Can't scale a color by a by a number lower than 1");
         return new Color(rgb.d1 / k.d1, rgb.d2 / k.d2, rgb.d3 / k.d3);
     }
+    public static boolean allEquals(Color... colors){
+        boolean result = true;
+        for (int i = 1; i < colors.length && result; i++) {
+            result = colors[0].equals(colors[i]);
+        }
+        return result;
+    }
+
+
+
 
     @Override
     public String toString() { return "rgb:" + rgb; }
