@@ -55,13 +55,13 @@ public class Triangle extends Polygon {
     }
 
     @Override
-    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
+    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
         List<GeoPoint> planeIntersections = plane.findGeoIntersections(ray, maxDistance);
         if (planeIntersections == null)
             return null;
 
-        Point p0 = ray.getP0();
-        Vector v = ray.getDir();
+        Point p0 = ray.getPoint();
+        Vector v = ray.getDirection();
 
         Vector v1 = this.p0.subtract(p0);
         Vector v2 = this.p1.subtract(p0);

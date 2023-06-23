@@ -136,5 +136,52 @@ public class Vector extends Point {
     public Vector scale(double delta) {
         return new Vector(xyz.scale(delta));
     }
+    /**
+     * Rotates the vector around the x-axis
+     *
+     * @param alpha the amount to rotate in degrees
+     * @return the current vector
+     */
+    public Vector rotateX(double alpha) {
+        double radianAlpha = alpha * Math.PI / 180;
+
+        double x = getX();
+        double y = getY() * Math.cos(radianAlpha) - getZ() * Math.sin(radianAlpha);
+        double z = getY() * Math.sin(radianAlpha) + getZ() * Math.cos(radianAlpha);
+
+        return new Vector(x, y, z);
+    }
+
+    /**
+     * Rotates the vector around the y axis
+     *
+     * @param alpha the amount to rotate in degrees
+     * @return the current vector
+     */
+    public Vector rotateY(double alpha) {
+        double radianAlpha = alpha * Math.PI / 180;
+
+        double x = getX() * Math.cos(radianAlpha) + getZ() * Math.sin(radianAlpha);
+        double y = getY();
+        double z = -getX() * Math.sin(radianAlpha) + getZ() * Math.cos(radianAlpha);
+
+        return new Vector(x, y, z);
+    }
+
+    /**
+     * Rotates the vector around the z axis
+     *
+     * @param alpha the amount to rotate in degrees
+     * @return the current vector
+     */
+    public Vector rotateZ(double alpha) {
+        double radianAlpha = alpha * Math.PI / 180;
+
+        double x = getX() * Math.cos(radianAlpha) - getY() * Math.sin(radianAlpha);
+        double y = getX() * Math.sin(radianAlpha) + getY() * Math.cos(radianAlpha);
+        double z = getZ();
+
+        return new Vector(x, y, z);
+    }
 
 }

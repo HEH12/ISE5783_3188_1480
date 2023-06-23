@@ -1,53 +1,99 @@
 package primitives;
 
+import geometries.Intersectable.GeoPoint;
+
 import java.util.List;
 import java.util.Objects;
 
 import static primitives.Util.alignZero;
-import static primitives.Util.isZero;
-
-import geometries.Intersectable.*;
 
 /**
- *@author Hadas Holtzberg & Zehavi Perla
+ * Class represents a Ray
  */
 public class Ray {
-
-    /**
-     * DELTA value to move the point away from original point
-     */
     private static final double DELTA = 0.1;
+    /**
+     * Field represents the head of the ray
+     */
+    final Point point;
+    /**
+     * Field represents the direction of the ray
+     */
+    final Vector direction;
 
-    private final Point p0;
-    private final Vector dir;
-
-    public Ray(Point p0, Vector dir) {
-        this.p0 = p0;
-        this.dir = dir.normalize();
+    /**
+     * constructor for ray
+     *
+     * @param point     parameter for point
+     * @param direction parameter for direction
+     */
+    public Ray(Point point, Vector direction) {
+        this.point = point;
+        this.direction = direction.normalize();
     }
 
     /**
-     * Constructor for ray deflected by DELTA
+     * construct a ray and move point slightly
      *
-     * @param p origin
-     * @param n   normal vector
-     * @param dir direction
+     * @param point     the point
+     * @param direction direction vector
+     * @param n         normal
      */
-    public Ray(Point p, Vector n, Vector dir) {
-        this.dir = dir.normalize();
-        double nv = n.dotProduct(this.dir);
-        Vector delta  =n.scale(DELTA);
-        if (nv < 0)
-            delta = delta.scale(-1);
-        this.p0 = p.add(delta);
+    public Ray(Point point, Vector direction, Vector n) {
+        double nv = alignZero(direction.dotProduct(n));
+        if (nv < 0) {
+            this.point = point.add(n.scale(-DELTA));
+
+        } else {
+            this.point = point.add(n.scale(DELTA));
+        }
+        this.direction = direction.normalize();
     }
 
-    public Point getP0() {
-        return p0;
+    /**
+     * Finds the closet Point that is intersected
+     *
+     * @param points the list of points in which to find the closest one
+     * @return the closest point
+     */
+    public Point findClosestPoint(List<Point> points) {
+        return points == null || points.isEmpty() ? null
+                : findClosestGeoPoint(points.stream().map(p -> new GeoPoint(null, p)).toList()).point;
     }
 
-    public Vector getDir() {
-        return dir;
+    /**
+     * Finds the closet GeoPoint that is intersected
+     *
+     * @param geoPointList the list of geoPoints in which to find the closest one
+     * @return the closest geoPoint
+     */
+    public GeoPoint findClosestGeoPoint(List<GeoPoint> geoPointList) {
+        if (geoPointList == null)
+            return null;
+
+        GeoPoint result = null;
+        double distance = Double.MAX_VALUE;
+        double d;
+        for (var pt : geoPointList) {
+            d = pt.point.distance(point);
+            if (d < distance) {
+                distance = d;
+                result = pt;
+            }
+        }
+        return result;
+    }
+
+    public Vector getDirection() {
+        return direction;
+    }
+
+    public Point getPoint() {
+        return point;
+    }
+
+    public Point getPoint(double d) {
+        return point.add(direction.scale(d));
     }
 
     @Override
@@ -55,50 +101,20 @@ public class Ray {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Ray ray = (Ray) o;
-        return p0.equals(ray.p0) && dir.equals(ray.dir);
+        return point.equals(ray.point) && direction.equals(ray.direction);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(p0, dir);
+        return Objects.hash(point, direction);
     }
 
     @Override
     public String toString() {
         return "Ray{" +
-                "p0=" + p0 +
-                ", dir=" + dir +
+                "point=" + point +
+                ", direction=" + direction +
                 '}';
     }
 
-    public Point getPoint(double delta) {
-        if (isZero(delta)) {
-            return p0;
-        }
-        return p0.add(dir.scale(delta));
-    }
-
-    public GeoPoint findClosestGeoPoint(List<GeoPoint> intersections) {
-        GeoPoint closestpoint = null;
-        double minDistance = Double.MAX_VALUE;
-        double ptDistance;
-
-        for (GeoPoint geoPoint : intersections) {
-            ptDistance = geoPoint.point.distanceSquared(p0);
-            if (ptDistance < minDistance) {
-                minDistance = ptDistance;
-                closestpoint = geoPoint;
-            }
-        }
-        return closestpoint;
-    }
-
-    public Point findClosestPoint(List<Point> intersections) {
-        return intersections == null || intersections.isEmpty()
-                ? null
-                : findClosestGeoPoint(intersections.stream()
-                .map(p -> new GeoPoint(null, p))
-                .toList()
-        ).point;
-    }
 }

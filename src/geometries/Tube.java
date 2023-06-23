@@ -66,8 +66,8 @@ public class Tube extends RadialGeometry{
 
     @Override
     public Vector getNormal(Point point) {
-        Point p0 = ray.getP0();
-        Vector v = ray.getDir();
+        Point p0 = ray.getPoint();
+        Vector v = ray.getDirection();
         Vector p0_p = point.subtract(p0);
 
         double w = v.dotProduct(p0_p);
@@ -89,10 +89,10 @@ public class Tube extends RadialGeometry{
      * {@see <a href="https://mrl.cs.nyu.edu/~dzorin/rendering/lectures/lecture3/lecture3.pdf"></a>}
      */
     @Override
-    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
-        Vector vAxis = ray.getDir();
-        Vector v = ray.getDir();
-        Point p0 = ray.getP0();
+    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
+        Vector vAxis = ray.getDirection();
+        Vector v = ray.getDirection();
+        Point p0 = ray.getPoint();
 
         // At^2+Bt+C=0
         double a = 0;
@@ -117,7 +117,7 @@ public class Tube extends RadialGeometry{
 
         Vector deltaP = null;
         try {
-            deltaP = p0.subtract(ray.getP0());
+            deltaP = p0.subtract(ray.getPoint());
         } catch (IllegalArgumentException e1) { // the ray begins at axis P0
             if (vVa == 0 && alignZero(radius - maxDistance) <= 0) { // the ray is orthogonal to Axis
                 return List.of(new GeoPoint(this, ray.getPoint(radius)));

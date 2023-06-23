@@ -87,15 +87,15 @@ public class Polygon extends Geometry {
      * @return list of point that intersections between the polygon to ray
      */
     @Override
-    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
+    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
         List<GeoPoint> planeIntersections = plane.findGeoIntersections(ray);
 
         if (planeIntersections == null) {
             return null;
         }
 
-        Point P0 = ray.getP0();
-        Vector v = ray.getDir();
+        Point P0 = ray.getPoint();
+        Vector v = ray.getDirection();
 
         Point P1 = vertices.get(1);
         Point P2 = vertices.get(0);

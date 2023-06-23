@@ -26,10 +26,19 @@ public abstract class RayTracerBase {
      */
     public abstract Color traceRay(Ray ray);
     
+
     /**
-     * abstract function to determine the color of a pixel
-     * @param rays - rays to intersect
-     * @return the color of the pixel intersects the given rays
+     * Declaration of abstract function
+     *
+     * @param rays rays to check the color
+     * @return Average color of all rays at the pixel
      */
-//    public abstract Color traceRays(List<Ray> rays);
+    public abstract Color traceRays(List<Ray> rays);
+    /**
+     * Declaration of abstract function
+     * @param rays rays to check the color
+     * @return Average color of some rays at the pixel, using adaptive super-sampling
+     */
+    public abstract Color adaptiveTraceRays(List<Ray> rays);
+
 }

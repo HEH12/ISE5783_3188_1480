@@ -65,9 +65,9 @@ public class Sphere extends RadialGeometry{
 
 
     @Override
-    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
-        Point P0 = ray.getP0();
-        Vector v = ray.getDir();
+    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
+        Point P0 = ray.getPoint();
+        Vector v = ray.getDirection();
 
         if (P0.equals(center)) {
             if(alignZero(radius - maxDistance) > 0){

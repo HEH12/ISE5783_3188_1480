@@ -110,7 +110,7 @@ public class IntegrationTest {
         int countIntersectionOfGeometries = 0;//count the intersection with the geometry
         for (int i = 0; i < nX; i++) {        //row
             for (int j = 0; j < nY; j++) {    //cow
-                Ray ray = camera.constructRay(nX, nY, j, i); //create ray to pixel
+                Ray ray = camera.constructRayThroughCenter(nX, nY, j, i); //create ray to pixel
                 var intersection = geometry.findIntersections(
                         ray); // find Intersections to the geometry with the ray
                 if (intersection != null) { //if there is intersection
