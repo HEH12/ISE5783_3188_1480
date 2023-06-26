@@ -31,6 +31,11 @@ public class Scene {
         return lights;
     }
 
+    /**
+     *
+     * @param background
+     * @return this
+     */
     public Scene setBackground(Color background) {
         this.background = background;
         return this;

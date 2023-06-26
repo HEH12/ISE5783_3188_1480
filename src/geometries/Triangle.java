@@ -19,8 +19,7 @@ public class Triangle extends Polygon {
     final Point p2;
     Vector v0v1;
     Vector v0v2;
-//    final Vector v0v1;
-//    final Vector v0v2;
+
 
     public Triangle(Point pA, Point pB, Point pC) {
         super(pA, pB, pC);
@@ -32,12 +31,7 @@ public class Triangle extends Polygon {
         /*Vector*/ v0v2 = p2.subtract(p0);      // v2 - v0
 
 
-///        Vector N = U.crossProduct(V).normalize();   // AB X AC
-//
-//        // right hand rule
-
         this.normal = v0v1.crossProduct(v0v2).normalize();
-//        this.normal = plane.getNormal();
     }
 
     @Override

@@ -147,7 +147,7 @@ public class ReflectionRefractionTests {
     public void test() {
         Scene scene = new Scene("Mini Project Final");
         Camera camera = new Camera(new Point(0, 0, 1000), new Vector(0, 0, -1), new Vector(0, 1, 0)) //
-                .setVPSize(200, 200).setVPDistance(1000);//.setMultithreading(5); //use multithreading
+                .setVPSize(200, 200).setVPDistance(1000);
         scene.geometries.add(
                 //train pass-Rails
 
@@ -264,8 +264,6 @@ public class ReflectionRefractionTests {
                 new Plane(new Point(-100, -100, -100), new Point(100, -150, -10), new Point(0, -50, -200))
                         .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(20).setKr(0.1)).setEmission(new Color(BLACK))
         );
-		/*scene.Light.add(new SpotLight(new Color(400, 200, 200), new Point3D(50,100,-70), new Vector(-1,0, -1)) //
-		.setKl(0.00001).setKq(0.00005));*/
 
         scene.lights.add(new PointLight(new Color(WHITE), new Point(-91, 0, -80)) //
                 .setKl(0.001).setKq(0.0005));
@@ -273,13 +271,12 @@ public class ReflectionRefractionTests {
                 .setKl(4E-5).setKq(2E-8));
 
 
-        ImageWriter imageWriter = new ImageWriter("Mini29000009", 600, 600);
+        ImageWriter imageWriter = new ImageWriter("Mini2", 1000, 1000);
                 camera.setImageWriter(imageWriter) //
-                .setRayTracer(new RayTracerBasic(scene).useSoftShadow(true).setNumOfSSRays(50).setRadiusBeamSS(10.0D)).setMultithreading(10)
+                .setRayTracer(new RayTracerBasic(scene))//.useSoftShadow(true).setNumOfSSRays(50).setRadiusBeamSS(10.0D))//.setMultithreading(10)
 
         .renderImage()
         .writeToImage();
-
 
 
 
@@ -290,9 +287,10 @@ public class ReflectionRefractionTests {
             Scene scene = new Scene("test909");
             Camera camera = new Camera(new Point(0, 0, 1000), new Vector(0, 0, -1), new Vector(0, 1, 0));
             camera.setVPDistance(1500);
-            camera.setVPSize(200, 250).useAntiAliasing(true)
-                    .setNumOfAARays(30)
-                    .setMultithreading(10);
+
+            camera.setVPSize(200, 250);//.useAntiAliasing(true)
+                   // .setNumOfAARays(15).useAdaptive(true)
+                   // .setMultithreading(10);
             scene.setAmbientLight(new AmbientLight(new Color(255, 255, 255), new Double3(0)));
             scene.setBackground(Color.BLACK);
 
@@ -325,7 +323,6 @@ public class ReflectionRefractionTests {
                     new Sphere(new Point(11, 43, 35.71), 2.2).setEmission(new Color(BLACK)).setMaterial(new Material().setKd(0.3).setKs(0.7).setShininess(100).setKt(0).setKr(0)),
                     new Sphere(new Point(-4, 43, 35.94), 2.2).setEmission(new Color(BLACK)).setMaterial(new Material().setKd(0.3).setKs(0.7).setShininess(100).setKt(0).setKr(0)),
                     //nose
-                    //new Triangle(new Point3D(0.2,36.6,37.6),new Point3D(5.7,36.85,37.70),new Point3D(3.33,31.8,36.65)).setEmission(new Color(java.awt.Color.gray)).setMaterial(new Material().setkD(0.3).setkS(0.7).setnShininess(100).setkT(0).setkR(0)),
                     new Sphere(new Point(2.699, 37.57, 37.94), 2.5).setEmission(new Color(gray)).setMaterial(new Material().setKd(0.3).setKs(0.7).setShininess(100).setKt(0).setKr(0)),
 
                     new Sphere(new Point(-8, 58, 18), 7).setEmission(new Color(77, 38, 0)).setMaterial(new Material().setKd(0.3).setKs(0.7).setShininess(100).setKt(0.5).setKr(0)),
@@ -343,7 +340,7 @@ public class ReflectionRefractionTests {
             PointLight point_light = new PointLight(new Color(400, 300, 300), new Point(0, 145, 50));
             //on mirror
 
-            ImageWriter imageWriter = new ImageWriter("mini1", 600, 600);
+            ImageWriter imageWriter = new ImageWriter("minip1", 1000, 1000);
 
             scene.lights.add(point_light.setKc(1).setKl(0.05).setKq(0.00005));
             scene.lights.add(direction_light);

@@ -1,5 +1,4 @@
 package geometries;
-/** @author Hadas Holtzberg 326133188 and Zehavi Perla 326381480 */
 import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
 

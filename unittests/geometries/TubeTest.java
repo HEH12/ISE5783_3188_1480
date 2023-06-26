@@ -8,9 +8,7 @@ import primitives.Ray;
 import primitives.Vector;
 class TubeTest {
 
-    /**
-     * Test method for {@link Tube#GetNormal}
-     */
+
     @Test
     void testGetNormal() {
 //        // ============ Equivalence Partitions Tests ==============

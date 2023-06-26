@@ -36,9 +36,7 @@ class PlaneTest {
     }
 
 
-    /**
-     * Test method for {@link Plane#GetNormal}
-     */
+
     @Test
     void testGetNormal() {
         // ============ Equivalence Partitions Tests ==============
